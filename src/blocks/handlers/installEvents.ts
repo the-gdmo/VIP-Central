@@ -1,0 +1,57 @@
+import { TriggerContext } from "@devvit/public-api";
+import { AppInstall, AppUpgrade } from "@devvit/protos";
+import { populateCleanupLogAndScheduleCleanup } from "../jobs/cleanup";
+import {
+    BOT_FLAIR_CRON,
+    CLEANUP_JOB,
+    CLEANUP_JOB_CRON,
+    MOD_DIGEST_CRON,
+    MOD_DIGEST_JOB,
+    MODINFO_CRON,
+    UPDATE_BOT_FLAIR_JOB,
+    UPDATE_MODINFO_JOB,
+    // UPGRADE_NOTIFIER_CRON,
+    // UPGRADE_NOTIFIER_JOB,
+} from "../config/constants";
+
+export async function onAppFirstInstall(
+    _: AppInstall,
+    context: TriggerContext
+) {
+    await context.redis.set("InstallDate", new Date().getTime().toString());
+}
+
+export async function onAppInstallOrUpgrade(
+    _: AppInstall | AppUpgrade,
+    context: TriggerContext
+) {
+    const currentJobs = await context.scheduler.listJobs();
+    await Promise.all(
+        currentJobs.map((job) => context.scheduler.cancelJob(job.id))
+    );
+
+    await context.scheduler.runJob({
+        name: CLEANUP_JOB,
+        cron: CLEANUP_JOB_CRON,
+    });
+    await context.scheduler.runJob({
+        name: UPDATE_MODINFO_JOB,
+        cron: MODINFO_CRON,
+    });
+    await context.scheduler.runJob({
+        name: UPDATE_BOT_FLAIR_JOB,
+        cron: BOT_FLAIR_CRON,
+    });
+
+    await context.scheduler.runJob({
+        name: MOD_DIGEST_JOB,
+        cron: MOD_DIGEST_CRON,
+    });
+
+    // await context.scheduler.runJob({
+    //     name: UPGRADE_NOTIFIER_JOB,
+    //     cron: UPGRADE_NOTIFIER_CRON,
+    // });
+
+    await populateCleanupLogAndScheduleCleanup(context);
+}
