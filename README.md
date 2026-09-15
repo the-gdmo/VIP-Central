@@ -1208,27 +1208,11 @@ VIP Central is an open-source Reddit application designed for use with Reddit's 
 
 VIP Central combines **XP, Levels, Coins, Reputation, Achievements, Streaks, and Leaderboards** into a single community-recognition system.
 
-This app is open source and licensed under the BSD 3-Clause License. You can find the source code on GitHub [here](https://github.com/the-gdmo/vipcentral).
+This app is open source and licensed under the BSD 3-Clause License. You can find the source code on GitHub [here](https://github.com/the-gdmo/vip-central).
 
 ---
 
 ## Latest Changes
-### 1.0.5
-* Return mod digest job to working as intended (forgot to add commenting durations back to v1.0.4)
-## v1.0.4
-* Add change log file
-* Change version formatting for "Latest Changes"
-* Make all mod digests be sent to the "Mod Discussions" Section of modmail
-## v1.0.3
-* Add "Moderators Exempt From Flairing?" option (by default, mods are exempt from flair management)
-## v1.0.2
-* Update default settings
-## v1.0.1
-* Make README accurately reflect commands
-* Remove subreddit rank from profile command
-* Make all command responses send a dm to the user with a public response notifying the user that it did
-* Change "Who can award points?" default to everyone
-* Fix formatting of certain logic
 ## v1.0.0
 * NOTE: As far as I can tell this should work fully. If it doesn't, please [message me](https://www.reddit.com/message/compose?to=u/ryry50583583&subject=VIP%20Bot%20Feature%20Missing&message=Error%20Details%3A%20%5BPlease%20provide%20me%20with%20as%20much%20detail%20as%20possible%20regarding%20what%20happened%5D%0A%0ALink%20to%20where%20the%20issue%20occurred%3A%20%5Bput%20link%20here%5D) to let me know and link to the original comment or post that made you aware of this.
 * Bring the bot into an up-and-running state
@@ -1237,5 +1221,6 @@ This app is open source and licensed under the BSD 3-Clause License. You can fin
 * Import [RepBot](https://github.com/the-gdmo/TheRepBot) code
 * Create VIP Central
 * Upload app image
+* Create change log
 
-For older versions, please see the [full changelog](https://github.com/the-gdmo/vipcentral/blob/main/changelog.md).
+For older versions, please see the [full changelog](https://github.com/the-gdmo/vip-central/blob/main/changelog.md).
