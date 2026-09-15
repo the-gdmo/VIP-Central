@@ -46,7 +46,7 @@ import {
     executeXPLeaderboardCommand,
 } from "../config/commandExecutors";
 
-async function replyToVIP CentralCommand(
+async function replyToVIPCentralCommand(
     event: CommentSubmit | CommentUpdate,
     context: TriggerContext,
     text: string
@@ -412,7 +412,7 @@ export async function onCommentSubmit(
     // ============================================================
 
     if (recipientIsBot) {
-        await replyToVIP CentralCommand(
+        await replyToVIPCentralCommand(
             event,
             context,
             `You do not have permission to award a(n) ${pointName} to u/${recipient}.`
@@ -479,7 +479,7 @@ export async function onCommentSubmit(
 
     if (pointReplyAwardCommand) {
         if (bodySplit.length !== 1) {
-            await replyToVIP CentralCommand(
+            await replyToVIPCentralCommand(
                 event,
                 context,
                 `Usage: \`${prefix}${pointCommandName}\`.`
@@ -499,7 +499,7 @@ export async function onCommentSubmit(
         }
 
         if (normalizedCommentAuthor === recipient.trim().toLowerCase()) {
-            await replyToVIP CentralCommand(
+            await replyToVIPCentralCommand(
                 event,
                 context,
                 `You do not have permission to award yourself a(n) ${pointName}.`
@@ -510,7 +510,7 @@ export async function onCommentSubmit(
         const coinsEnabled =
             (settings[AppSetting.CoinsEnabled] as boolean | undefined) ?? true;
         if (!coinsEnabled) {
-            await replyToVIP CentralCommand(
+            await replyToVIPCentralCommand(
                 event,
                 context,
                 "VIP Coins are disabled here, so the combined point reply award cannot be applied."
@@ -529,7 +529,7 @@ export async function onCommentSubmit(
         }
 
         if (!recipientUser) {
-            await replyToVIP CentralCommand(
+            await replyToVIPCentralCommand(
                 event,
                 context,
                 "I couldn't resolve the author of the comment you replied to."
@@ -555,7 +555,7 @@ export async function onCommentSubmit(
             ]);
 
         if (alreadyRewarded || legacyCoinRewarded || legacyVipPointRewarded) {
-            await replyToVIP CentralCommand(
+            await replyToVIPCentralCommand(
                 event,
                 context,
                 "You already used your reply award on this comment."
@@ -618,7 +618,7 @@ export async function onCommentSubmit(
                 coinAwardAmount,
                 error,
             });
-            await replyToVIP CentralCommand(
+            await replyToVIPCentralCommand(
                 event,
                 context,
                 "The combined VIP-point and coin reply award could not be applied."
@@ -656,7 +656,7 @@ export async function onCommentSubmit(
             vipPointAwardAmount === 1 ? "" : "s"
         }`;
         const coinLabel = `coin${coinAwardAmount === 1 ? "" : "s"}`;
-        await replyToVIP CentralCommand(
+        await replyToVIPCentralCommand(
             event,
             context,
             `⭐🪙 **u/${
