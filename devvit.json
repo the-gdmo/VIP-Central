@@ -15,7 +15,7 @@
     "dir": "assets"
   },
   "marketingAssets": {
-    "icon": "assets/vipbot.png"
+    "icon": "assets/vipcentral.png"
   },
   "forms": {
     "post-create-form": "/internal/form/create-post"
